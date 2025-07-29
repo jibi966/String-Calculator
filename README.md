@@ -1,3 +1,21 @@
-# String-Calculator
+# String Calculator TDD Kata
 
-solving string calculator by following TDD principles
+## Installation & Setup Instructions
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/jibi966/String-Calculator.git
+cd string-calculator-kata
+```
+
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+
+### 3. Run the tests
+```bash
+npm test
+```
