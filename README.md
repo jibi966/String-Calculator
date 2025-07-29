@@ -5,7 +5,7 @@
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/jibi966/String-Calculator.git
-cd string-calculator-kata
+cd String-Calculator
 ```
 
 
