@@ -14,6 +14,13 @@ export function add(numbers: string): number {
     }
     // Split the string by commas to handle multiple numbers
     const parts = nums.split(delimiter).map(Number);
+
+    // Check for negative numbers and throw an error if any are found
+    const negatives = parts.filter(num => num < 0);
+    if (negatives.length > 0) {
+        throw new Error(`negative numbers not allowed ${negatives.join(',')}`);
+    }
+
     // if number is a single number, return it as an integer
     if (parts.length === 1) return parts[0];
 
