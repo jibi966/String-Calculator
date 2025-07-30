@@ -45,3 +45,15 @@ test("supports custom delimiter of any length like [***]", () => {
 test("supports custom delimiter of any length like [abc]", () => {
     expect(add("//[abc]\n2abc3abc4")).toBe(9);
 });
+
+test("supports multiple delimiters of single character", () => {
+    expect(add("//[*][%]\n1*2%3")).toBe(6);
+});
+
+test("supports multiple delimiters of any length", () => {
+    expect(add("//[***][%%]\n1***2%%3")).toBe(6);
+});
+
+test("supports multiple delimiters mixed length", () => {
+    expect(add("//[a][bbb][##]\n1a2bbb3##4")).toBe(10);
+});

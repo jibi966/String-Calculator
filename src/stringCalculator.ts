@@ -1,15 +1,29 @@
 export function add(numbers: string): number {
     // If the input is an empty string, return 0
     if (numbers === "") return 0;
-    
+
     let delimiter = /,|\n/;
     let nums = numbers;
 
     if (numbers.startsWith("//")) {
-        const delimiterMatch = numbers.match(/^\/\/(.+)\n/);
-        if (delimiterMatch) {
-            delimiter = new RegExp(delimiterMatch[1]);
-            nums = numbers.substring(delimiterMatch[0].length);
+        if (numbers.startsWith("//[")) {
+            // Handle multiple delimiters like //[***][%]
+            const delimiterSectionEnd = numbers.indexOf('\n');
+            const delimiterSection = numbers.substring(2, delimiterSectionEnd);
+            const delimiterMatches = [...delimiterSection.matchAll(/\[([^\]]+)\]/g)];
+
+            const delimiters = delimiterMatches.map(match =>
+                match[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+            );
+
+            delimiter = new RegExp(delimiters.join('|'));
+            nums = numbers.substring(delimiterSectionEnd + 1);
+        } else {
+            const delimiterMatch = numbers.match(/^\/\/(.+)\n/);
+            if (delimiterMatch) {
+                delimiter = new RegExp(delimiterMatch[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+                nums = numbers.substring(delimiterMatch[0].length);
+            }
         }
     }
     // Split the string by commas to handle multiple numbers
