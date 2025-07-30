@@ -21,9 +21,12 @@ export function add(numbers: string): number {
         throw new Error(`negative numbers not allowed ${negatives.join(',')}`);
     }
 
-    // if number is a single number, return it as an integer
-    if (parts.length === 1) return parts[0];
+    // Ignore numbers > 1000
+    const filtered = parts.filter(n => n <= 1000);
 
-    return parts.reduce((sum, val) => sum + val, 0);
+    // if number is a single number, return it as an integer
+    if (filtered.length === 1) return parts[0];
+
+    return filtered.reduce((sum, val) => sum + val, 0);
 
 }
